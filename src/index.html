@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+<!--
+    Main UI panel for the Color Extractor Adobe Express Add-on.
+    
+    This file defines the add-on's user interface panel that:
+    1) Provides an image upload input for users to select images
+    2) Displays a color palette bar showing dominant colors extracted from the image
+    3) Provides a button to import the uploaded image onto the Adobe Express canvas
+    
+    The UI uses Adobe Spectrum Web Components to match Adobe Express's design system.
+    The actual logic is handled by ui/index.js which is loaded at the bottom of this file.
+-->
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -10,9 +21,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Color Extractor</title>
         <!-- Adobe Spectrum Web Components -->
+        <!-- Spectrum components provide consistent UI elements (buttons, labels, themes) that match Adobe Express's design system -->
         <script type="module" src="https://unpkg.com/@spectrum-web-components/bundle/elements.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/@spectrum-web-components/theme/dist/themes/express.css" />
         <style>
+            /* Main container for all add-on UI elements */
             .container {
                 margin: 24px;
                 display: flex;
@@ -20,6 +33,8 @@
                 gap: 16px;
             }
 
+            /* Color palette bar that displays dominant colors as horizontal segments */
+            /* Each segment's width represents the percentage of that color in the image */
             #colorBar {
                 width: 100%;
                 height: 60px;
@@ -29,6 +44,8 @@
                 border: 1px solid rgba(0, 0, 0, 0.1);
             }
 
+            /* Individual color segment within the palette bar */
+            /* Displays the color percentage as text with appropriate contrast */
             .color-segment {
                 height: 100%;
                 display: flex;
@@ -45,6 +62,7 @@
                 opacity: 0.9;
             }
 
+            /* File input for image upload */
             input[type="file"] {
                 width: 100%;
                 padding: 8px;
@@ -52,6 +70,8 @@
                 border-radius: 4px;
             }
 
+            /* Button to import the uploaded image onto the Adobe Express canvas */
+            /* Uses Adobe's primary blue color (#1473e6) to match Express design system */
             #importButton {
                 width: 100%;
                 padding: 10px 16px;
@@ -80,15 +100,21 @@
         </style>
     </head>
     <body>
+        <!-- Spectrum theme wrapper ensures UI matches Adobe Express's visual style -->
         <sp-theme system="express" color="light" scale="medium">
             <div class="container">
+                <!-- Image upload input - accepts any image format -->
                 <sp-field-label for="imageUpload">Upload Image</sp-field-label>
                 <input type="file" id="imageUpload" accept="image/*" />
+                <!-- Button to import the uploaded image onto the Adobe Express canvas -->
                 <button id="importButton" type="button">Import img to page</button>
+                <!-- Color palette bar - dynamically populated with dominant colors after image analysis -->
                 <div id="colorBar"></div>
             </div>
         </sp-theme>
+        <!-- Console override for debugging in Adobe Express environment -->
         <script type="module" src="add-on-console-override.js"></script>
+        <!-- Main UI logic - handles image upload, color extraction, and canvas import -->
         <script type="module" src="ui/index.js"></script>
     </body>
 </html>
