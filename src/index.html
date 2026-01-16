@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="description"
+            content="Color Extractor Add-on for Adobe Express"
+        />
+        <meta name="keywords" content="Adobe, Express, Add-On, JavaScript, Document Sandbox Runtime" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Color Extractor</title>
+        <!-- Adobe Spectrum Web Components -->
+        <script type="module" src="https://unpkg.com/@spectrum-web-components/bundle/elements.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/@spectrum-web-components/theme/dist/themes/express.css" />
+        <style>
+            .container {
+                margin: 24px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            #colorBar {
+                width: 100%;
+                height: 60px;
+                display: flex;
+                border-radius: 4px;
+                overflow: hidden;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            .color-segment {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 12px;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+                transition: opacity 0.2s;
+            }
+
+            .color-segment:hover {
+                opacity: 0.9;
+            }
+
+            input[type="file"] {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 4px;
+            }
+
+            #importButton {
+                width: 100%;
+                padding: 10px 16px;
+                background-color: #1473e6;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                font-size: 14px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: background-color 0.2s;
+            }
+
+            #importButton:hover {
+                background-color: #0d66d0;
+            }
+
+            #importButton:active {
+                background-color: #095aba;
+            }
+
+            #importButton:disabled {
+                background-color: #ccc;
+                cursor: not-allowed;
+            }
+        </style>
+    </head>
+    <body>
+        <sp-theme system="express" color="light" scale="medium">
+            <div class="container">
+                <sp-field-label for="imageUpload">Upload Image</sp-field-label>
+                <input type="file" id="imageUpload" accept="image/*" />
+                <button id="importButton" type="button">Import img to page</button>
+                <div id="colorBar"></div>
+            </div>
+        </sp-theme>
+        <script type="module" src="add-on-console-override.js"></script>
+        <script type="module" src="ui/index.js"></script>
+    </body>
+</html>
